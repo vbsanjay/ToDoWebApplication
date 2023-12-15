@@ -18,7 +18,7 @@ public class LoginController {
 	}
 	
 	//@RequestParam String username <- the variable name "username" should be equal to the name in the form.
-	//Username: <input type ="text" name = "username"> name = "username" == String username
+	//Username: <input type ="text" name = "username"> name = "username" == String username.
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String goToWelcomePage(@RequestParam String username, @RequestParam String password, ModelMap model) {
 		model.put("name", username);
