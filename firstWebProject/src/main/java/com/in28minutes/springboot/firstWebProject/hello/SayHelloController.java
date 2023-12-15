@@ -33,8 +33,4 @@ public class SayHelloController {
 		return "sayHello"; //this is not string, this is jsp file name
 	}
 	
-	@RequestMapping("login")
-	public String login() {
-		return "login";
-	}
 }
