@@ -2,6 +2,7 @@ package com.in28minutes.springboot.firstWebProject.todoApplication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	AuthenticationService authenticationService;
+	
+	@Autowired
+	LoginController(AuthenticationService authenticationService){
+		this.authenticationService = authenticationService;
+	}
+	
 	
 	@RequestMapping("login")
 	public String login() {
+		logger.debug("Hey! This will we seen when debug log level is enabled");
 		return "login";
 	}
 	
@@ -21,9 +30,12 @@ public class LoginController {
 	//Username: <input type ="text" name = "username"> name = "username" == String username.
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String goToWelcomePage(@RequestParam String username, @RequestParam String password, ModelMap model) {
-		model.put("name", username);
-		model.put("password", password);
-		return "welcome";
+		if(authenticationService.authentication(username, password)) {
+			model.put("name", username);
+			model.put("password", password);
+			return "welcome";
+		}
+		return "login";
 	}
 	
 }
