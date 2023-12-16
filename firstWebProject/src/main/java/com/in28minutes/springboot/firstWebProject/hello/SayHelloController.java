@@ -32,4 +32,5 @@ public class SayHelloController {
 	public String sayHelloJSP() {
 		return "sayHello"; //this is not string, this is jsp file name
 	}
+	
 }
