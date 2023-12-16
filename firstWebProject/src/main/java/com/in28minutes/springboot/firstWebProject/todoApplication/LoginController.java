@@ -35,6 +35,7 @@ public class LoginController {
 			model.put("password", password);
 			return "welcome";
 		}
+		model.put("errorMessage", "Wrong username or password");
 		return "login";
 	}
 	
